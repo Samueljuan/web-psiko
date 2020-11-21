@@ -100,7 +100,7 @@
             <div class="row form-group">
                <div class="col-md-12">
                   <label class="text-black" for="email"><strong>Nama</strong></label>
-                  <input type="text" name="name" placeholder="nama lengkap..." class="form-control" required name="Nama">
+                  <input type="text" name="name" placeholder="Nama Lengkap..." class="form-control" required name="Nama">
                </div>
             </div>
 

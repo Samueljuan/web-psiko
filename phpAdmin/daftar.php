@@ -128,7 +128,7 @@
             <div class="row form-group">
                <div class="col-md-12">
                   <label class="text-black" for="email"><strong>Repeat Password</strong></label>
-                  <input type="password" name="pwdrepeat" placeholder="repeat Password..." class="form-control" required name="Repeat Password">
+                  <input type="password" name="pwdrepeat" placeholder="Repeat Password..." class="form-control" required name="Repeat Password">
                </div>
             </div>
 

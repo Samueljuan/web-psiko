@@ -1,2 +1,0 @@
-# web-psiko
-web physiology

@@ -68,11 +68,36 @@ function uidExists($conn, $username, $email){
    mysqli_stmt_close($stmt);
 }
 
+function uidExistsAdmin($conn, $username, $email){
+   $sql = "SELECT * FROM admins WHERE adminUid = ? OR adminEmail = ?;";
+   $stmt = mysqli_stmt_init($conn);
+   if (!mysqli_stmt_prepare($stmt, $sql)){
+      header ("location: ../phpAdmin/daftar.php?error=stmtfailed");
+      exit();
+   }
+
+   mysqli_stmt_bind_param($stmt, "ss", $username, $email); 
+   mysqli_stmt_execute($stmt);
+
+   $resultData= mysqli_stmt_get_result($stmt);
+
+   if ($row = mysqli_fetch_assoc($resultData)){
+      return $row;
+   }
+   else{
+      $result=false;
+      return $result;
+   }
+
+   mysqli_stmt_close($stmt);
+}
+
+
 function createUser($conn, $name, $email, $username, $pwd){
    $sql = "INSERT INTO users(usersName, usersEmail, usersUid, usersPwd) VALUES (?, ?, ?, ?);";
    $stmt= mysqli_stmt_init($conn);
    if (!mysqli_stmt_prepare($stmt, $sql)){
-      header ("location: ../phpAdmin/daftar.php?eror=stmtfailedddd");
+      header ("location: ../phpAdmin/daftar.php?error=stmtfailed");
       exit();
    }
 
@@ -81,7 +106,24 @@ function createUser($conn, $name, $email, $username, $pwd){
    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hasedPwd);
    mysqli_stmt_execute($stmt);
    mysqli_stmt_close($stmt);
-   header ("location: ../phpAdmin/daftar.php?eror=none");
+   header ("location: ../phpAdmin/daftar.php?error=none");
+   exit();
+}
+
+function createAdmin($conn, $name, $email, $username, $pwd){
+   $sql = "INSERT INTO admins(adminName, adminEmail, adminUid, adminPwd) VALUES (?, ?, ?, ?);";
+   $stmt= mysqli_stmt_init($conn);
+   if (!mysqli_stmt_prepare($stmt, $sql)){
+      header ("location: ../phpAdmin/daftar-admin.php?error=stmtfailed");
+      exit();
+   }
+
+   $hasedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+   mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hasedPwd);
+   mysqli_stmt_execute($stmt);
+   mysqli_stmt_close($stmt);
+   header ("location: ../phpAdmin/daftar-admin.php?error=none");
    exit();
 }
 
@@ -116,6 +158,30 @@ function loginUser($conn, $username, $pwd){
       $_SESSION["userid"] = $uidExists["usersId"];
       $_SESSION["useruid"] = $uidExists["usersUid"];
       header ("location: ../phpUsers/dashboard.php");
+      exit();
+   }
+}
+
+function loginAdmin($conn, $username, $pwd){
+   $uidExistsAdmin = uidExistsAdmin($conn, $username, $username);
+
+   if ($uidExistsAdmin === false){
+      header ("location: ../index.php?error=wronglogin");
+      exit();
+   }
+
+   $pwdHashed= $uidExistsAdmin["adminPwd"];
+   $checkPwd = password_verify($pwd, $pwdHashed);
+
+   if ($checkPwd === false){
+      header ("location: ../index.php?error=wronglogin");
+      exit();
+   } 
+   else if ($checkPwd === true){
+      session_start();
+      $_SESSION["adminid"] = $uidExistsAdmin["adminId"];
+      $_SESSION["adminuid"] = $uidExistsAdmin["adminUid"];
+      header ("location: ../phpAdmin/dashboard.php");
       exit();
    }
 }

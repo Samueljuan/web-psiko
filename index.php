@@ -35,10 +35,14 @@
          <?php
             if (isset($_GET["error"])){
                if ($_GET["error"]== "emptyinput"){
-                  echo "<p> Fill in All Fields</p>";
+                  echo "<div class='alert alert-danger' role='alert'>
+                  Tolong diisi semua!
+                </div>";
                }
                else if ($_GET["error"]== "wronglogin"){
-                  echo "<p> Incorrect login informartion!</p>";
+                  echo "<div class='alert alert-danger' role='alert'>
+                  Username atau Password Salah!
+                </div>";
                }
             }
          ?>

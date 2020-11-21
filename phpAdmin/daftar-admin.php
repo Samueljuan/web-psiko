@@ -63,14 +63,13 @@
                <hr class="bg-secondary">
             </li>
             <li class="nav-item">
-               <a class="nav-link text-white" href="https://localhost/PSIKOLOGI/phpAdmin/daftar.php"><i class="fas fa-comment-dots mr-2"></i>Daftar Dosen</a>
+               <a class="nav-link text-white" href="https://localhost/PSIKOLOGI/phpAdmin/daftar.php"><i class="fas fa-comment-dots mr-2"></i>Daftar </a>
                <hr class="bg-secondary">
             </li>
             <li class="nav-item">
                <a class="nav-link text-white" href="https://localhost/PSIKOLOGI/phpAdmin/daftar-admin.php"><i class="fas fa-comment-dots mr-2"></i>Daftar Admin</a>
                <hr class="bg-secondary">
             </li>
-
          </ul>
       </div>
 
@@ -114,7 +113,7 @@
                }
             }
          ?>
-         <form class="p-5 bg-white" data-aos="zoom-in-up" method="POST" action="../includes/signup.inc.php">
+         <form class="p-5 bg-white" data-aos="zoom-in-up" method="POST" action="../includes/signup-admin.inc.php">
             <div class="row form-group">
                <div class="col-md-12">
                   <label class="text-black" for="email"><strong>Nama</strong></label>

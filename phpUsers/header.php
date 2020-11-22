@@ -21,8 +21,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
-
-      <a class='navbar-brand' href='#'>SELAMAT DATANG ADMIN</a>
+      <a class="navbar-brand" href="#">SELAMAT DATANG ADMIN</a>
       <form class="form-inline my-2 my-lg-0 ml-auto">
       </form>
 
@@ -35,13 +34,13 @@
             <a href="https://www.gmail.com" target="_blank">
                <i class="fa-1x fas fa-bell btn" title="Notifikasi"></i>
             </a>
-            <a href="../includes/logout.inc.php">
+            <a href="https://localhost/PSIKOLOGI/index.php">
                <i class="fa-1x fas fa-sign-out-alt btn" title="Keluar"></i>
             </a>
          </h5>
       </div>
    </nav>
-
+   
    <!-- no-gutters agar tidak ada jarak antar grid -->
    <div class="row no-gutters mt-5">
       <div class="col-md-2 bg-dark mt-2 pr-3 pt-4">
@@ -61,14 +60,6 @@
             </li>
             <li class="nav-item">
                <a class="nav-link text-white" href="penunjang.php"><i class="fas fa-comment-dots mr-2"></i>Penunjang lainnya </a>
-               <hr class="bg-secondary">
-            </li>
-            <li class="nav-item">
-               <a class="nav-link text-white" href="daftar.php"><i class="fas fa-users mr-2"></i>Daftar Dosen</a>
-               <hr class="bg-secondary">
-            </li>
-            <li class="nav-item">
-               <a class="nav-link text-white" href="daftar-admin.php"><i class="fas fa-user-tie mr-2"></i>Daftar Admin</a>
                <hr class="bg-secondary">
             </li>
 

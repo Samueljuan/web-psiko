@@ -75,7 +75,14 @@
                <a class="nav-link text-white" href="daftar-admin.php"><i class="fas fa-user-tie mr-2"></i>Daftar Admin</a>
                <hr class="bg-secondary">
             </li>
-
+            <li class="nav-item">
+               <a class="nav-link text-white" href="hapus-dosen.php"><i class="fas fa-user-tie mr-2"></i>Hapus Dosen</a>
+               <hr class="bg-secondary">
+            </li>           
+            <li class="nav-item">
+               <a class="nav-link text-white" href="hapus-admin.php"><i class="fas fa-user-tie mr-2"></i>Hapus Admin</a>
+               <hr class="bg-secondary">
+            </li>
          </ul>
       </div>
 

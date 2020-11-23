@@ -39,10 +39,7 @@
                   <td><?= $row["usersName"]; ?></td>
                   <td><?= $row['usersId'];?></td>
                   <td><?= $row["usersEmail"]; ?></td>
-                  <td><i class="fas fa-download bg-success p-2 text-white rounded btn" data-toggle="tooltip" title="Download"></i></td>
-                  <td>
-                     <i class="far fa-trash-alt bg-danger p-2 text-white rounded btn" data-toggle="tooltip" title="Hapus" onclick="konfirmasik()">
-                     </i></td>
+                  <td><i class="fas fa-download bg-success p-2 text-white rounded btn" data-toggle="tooltip" title="Download File"></i></td>
                </tr>
             <?php }
             }

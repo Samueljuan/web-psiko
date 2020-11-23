@@ -185,3 +185,22 @@ function loginAdmin($conn, $username, $pwd){
       exit();
    }
 }
+
+function nikExist($conn, $nik){
+   $sql = "SELECT * FROM admins WHERE usersId = $nik;";
+   $stmt = mysqli_stmt_init($conn);
+   if (!mysqli_stmt_prepare($stmt, $sql)){
+      header ("location: ../phpAdmin/hapus-dosen.php?error=stmtfailed");
+      exit();
+   }
+}
+
+function deleteLecturer($conn, $nik){
+   $sql= "DELETE FROM 'users' WHERE usersId=$nik;";
+   $stmt= mysqli_stmt_init($conn);
+
+   if (!mysqli_stmt_prepare($stmt, $sql)){
+      header ("location: ../phpAdmin/hapus-dosen.php?error=stmtfailed");
+      exit();
+   }
+}

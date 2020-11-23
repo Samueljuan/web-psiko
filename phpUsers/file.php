@@ -30,6 +30,7 @@
                <input type="submit" name="submit" value="UPLOAD" class="btn btn-primary py-2 px-4 text-white">
             </div>
          </form>
+         <input type="date" class="form-control" name="date">
 
 
          <H3>DAFTAR FILE</H3>

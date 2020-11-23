@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST ["submit"])){
+if (isset($_POST["submit"])) {
 
 
    $name = $_POST["name"];
@@ -12,32 +12,31 @@ if (isset($_POST ["submit"])){
    require_once 'database.php';
    require_once 'functions.inc.php';
 
-   if (emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) !== false){
-      header ("location: ../phpAdmin/daftar.php?error=emptyinput");
+   if (emptyInputSignup($name, $email, $$username, $nik, $pwd, $pwdRepeat) !== false) {
+      header("location: ../phpAdmin/daftar.php?error=emptyinput");
       exit();
    }
 
-   if (invalidUid($username) !== false){
-      header ("location: ../phpAdmin/daftar.php?error=invaliduid");
+   if (invalidUid($username) !== false) {
+      header("location: ../phpAdmin/daftar.php?error=invaliduid");
       exit();
    }
-   if (invalidEmail($email) !== false){
-      header ("location: ../phpAdmin/daftar.php?error=invalidemail");
-      exit();
-   }
-
-   if (pwdMatch($pwd, $pwdRepeat) !== false){
-      header ("location: ../phpAdmin/daftar.php?error=passwordsdontmatch");
+   if (invalidEmail($email) !== false) {
+      header("location: ../phpAdmin/daftar.php?error=invalidemail");
       exit();
    }
 
-   if (uidExists($conn, $username, $email) !== false){
-      header ("location: ../phpAdmin/daftar.php?error=usernametaken");
+   if (pwdMatch($pwd, $pwdRepeat) !== false) {
+      header("location: ../phpAdmin/daftar.php?error=passwordsdontmatch");
+      exit();
+   }
+
+   if (uidExists($conn, $username, $email) !== false) {
+      header("location: ../phpAdmin/daftar.php?error=usernametaken");
       exit();
    }
 
    createUser($conn, $name, $email, $username, $pwd);
-}
-else{
+} else {
    header("location: ../phpAdmin/daftar.php");
 }

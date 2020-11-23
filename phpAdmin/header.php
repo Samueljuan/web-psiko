@@ -60,6 +60,10 @@
                <hr class="bg-secondary">
             </li>
             <li class="nav-item">
+               <a class="nav-link text-white" href="list-dosen.php"><i class="fas fa-chalkboard-teacher mr-2"></i>List Dosen</a>
+               <hr class="bg-secondary">
+            </li>
+            <li class="nav-item">
                <a class="nav-link text-white" href="penunjang.php"><i class="fas fa-comment-dots mr-2"></i>Penunjang lainnya </a>
                <hr class="bg-secondary">
             </li>

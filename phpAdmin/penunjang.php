@@ -12,26 +12,6 @@ $result = mysqli_query($conn, "SELECT * FROM komentar");
 </head>
 
 <body>
-   <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
-      <a class="navbar-brand" href="#">SELAMAT DATANG ADMIN</a>
-      <form class="form-inline my-2 my-lg-0 ml-auto">
-      </form>
-      <!-- tolltip: Semacam tulisan kalo di hover -->
-      <div class="icon ml-4">
-         <h5>
-            <a href="https://www.gmail.com" target="_blank">
-               <i class="fa-1x fas fa-envelope-open-text btn" title="Surat Masuk"></i>
-            </a>
-            <a href="https://www.gmail.com" target="_blank">
-               <i class="fa-1x fas fa-bell btn" title="Notivikasi"></i>
-            </a>
-            <a href="https://localhost/PSIKOLOGI/index.php">
-               <i class="fa-1x fas fa-sign-out-alt btn" title="Keluar"></i>
-            </a>
-         </h5>
-      </div>
-   </nav>
-   <!-- no-gutters agar tidak ada jarak antar grid -->
    <?php
       include_once 'header.php';
    ?>

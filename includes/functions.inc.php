@@ -1,8 +1,8 @@
 <?php
 
-function emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat){
+function emptyInputSignup($name, $email, $username, $nik, $pwd, $pwdRepeat){
    $result;
-   if (empty($name) || empty ($email)|| empty ($username)|| empty ($pwd)|| empty ($pwdRepeat) ){
+   if (empty($name) || empty ($email)|| empty ($username)|| empty ($nik)|| empty ($pwd)|| empty ($pwdRepeat) ){
       $result = true;
    }
    else{
@@ -110,8 +110,8 @@ function createUser($conn, $name, $email, $username, $pwd){
    exit();
 }
 
-function createAdmin($conn, $name, $email, $username, $pwd){
-   $sql = "INSERT INTO admins(adminName, adminEmail, adminUid, adminPwd) VALUES (?, ?, ?, ?);";
+function createAdmin($conn, $name, $email, $nik, $username, $pwd){
+   $sql = "INSERT INTO admins(adminName, adminEmail, adminId, adminUid, adminPwd) VALUES (?, ?, ?, ?, ?);";
    $stmt= mysqli_stmt_init($conn);
    if (!mysqli_stmt_prepare($stmt, $sql)){
       header ("location: ../phpAdmin/daftar-admin.php?error=stmtfailed");
@@ -120,7 +120,7 @@ function createAdmin($conn, $name, $email, $username, $pwd){
 
    $hasedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-   mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hasedPwd);
+   mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $nik, $username, $hasedPwd);
    mysqli_stmt_execute($stmt);
    mysqli_stmt_close($stmt);
    header ("location: ../phpAdmin/daftar-admin.php?error=none");

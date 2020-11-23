@@ -5,6 +5,8 @@ if (isset($_POST ["submit"])){
 
    $name = $_POST["name"];
    $email = $_POST["email"];
+   $nik = $_POST["nik"];
+   // LOGIN SYSTEM
    $username = $_POST["uid"];
    $pwd = $_POST["pwd"];
    $pwdRepeat = $_POST["pwdrepeat"];
@@ -12,7 +14,7 @@ if (isset($_POST ["submit"])){
    require_once 'database.php';
    require_once 'functions.inc.php';
 
-   if (emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) !== false){
+   if (emptyInputSignup($name, $email, $nik, $username, $pwd, $pwdRepeat) !== false){
       header ("location: ../phpAdmin/daftar-admin.php?error=emptyinput");
       exit();
    }
@@ -26,6 +28,7 @@ if (isset($_POST ["submit"])){
       exit();
    }
 
+   // LOGIN SYSTEM
    if (pwdMatch($pwd, $pwdRepeat) !== false){
       header ("location: ../phpAdmin/daftar-admin.php?error=passwordsdontmatch");
       exit();
@@ -36,7 +39,7 @@ if (isset($_POST ["submit"])){
       exit();
    }
 
-   createAdmin($conn, $name, $email, $username, $pwd);
+   createAdmin($conn, $name, $email, $nik, $username, $pwd);
 }
 else{
    header("location: ../phpAdmin/daftar-admin.php");

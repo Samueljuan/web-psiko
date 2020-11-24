@@ -59,7 +59,13 @@
                   <input type="email" name="email" placeholder="Email..." class="form-control" required name="email">
                </div>
             </div>
-
+            
+            <div class="row form-group">
+            <div class="col-md-12">
+               <label class="text-black" for="email"><strong>NIK</strong></label>
+               <input type="text" name="nik" placeholder="NIK..." class="form-control" required name="nik">
+            </div>
+         </div>
             <hr class="mt-5 mb-5">
 
             <div class="row form-group">

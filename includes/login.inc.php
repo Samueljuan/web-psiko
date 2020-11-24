@@ -13,8 +13,8 @@ if (isset($_POST["submit"])){
       exit();
    }
 
-   loginAdmin($conn, $username, $pwd);
    loginUser($conn, $username, $pwd); 
+   loginAdmin($conn, $username, $pwd);
 
 
 }

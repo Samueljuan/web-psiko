@@ -6,13 +6,14 @@ if (isset($_POST["submit"])) {
    $name = $_POST["name"];
    $email = $_POST["email"];
    $username = $_POST["uid"];
+   $nik= $_POST["nik"]; 
    $pwd = $_POST["pwd"];
    $pwdRepeat = $_POST["pwdrepeat"];
 
    require_once 'database.php';
    require_once 'functions.inc.php';
 
-   if (emptyInputSignup($name, $email, $$username, $nik, $pwd, $pwdRepeat) !== false) {
+   if (emptyInputSignup($name, $email, $username, $nik, $pwd, $pwdRepeat) !== false) {
       header("location: ../phpAdmin/daftar.php?error=emptyinput");
       exit();
    }

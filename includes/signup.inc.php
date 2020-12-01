@@ -5,15 +5,17 @@ if (isset($_POST["submit"])) {
 
    $name = $_POST["name"];
    $email = $_POST["email"];
+   $nik = $_POST["nik"];
+   // LOGIN SYSTEM
+   $status = $_POST["signup-as"];
    $username = $_POST["uid"];
-   $nik= $_POST["nik"]; 
    $pwd = $_POST["pwd"];
    $pwdRepeat = $_POST["pwdrepeat"];
 
    require_once 'database.php';
    require_once 'functions.inc.php';
 
-   if (emptyInputSignup($name, $email, $username, $nik, $pwd, $pwdRepeat) !== false) {
+   if (emptyInputSignup($name, $email, $nik, $status, $username, $pwd, $pwdRepeat) !== false) {
       header("location: ../phpAdmin/daftar.php?error=emptyinput");
       exit();
    }
@@ -37,7 +39,7 @@ if (isset($_POST["submit"])) {
       exit();
    }
 
-   createUser($conn, $name, $email, $username, $pwd);
+   createUser($conn, $name, $email, $nik, $status, $username, $pwd);
 } else {
    header("location: ../phpAdmin/daftar.php");
 }

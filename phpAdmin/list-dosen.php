@@ -16,8 +16,8 @@
       </nav>
       <hr>
 
-      <form action="../includes/lecturer-order.inc.php" method="$_POST">
-         <!-- <div class="container mt-5 mb-5">
+      <form method="POST" action="" >
+         <div class="container mt-5 mb-5">
             <div class="row justify-content-around">
                <select class="custom-select col-4">
                   <optgroup label="Urutkan Dosen Berdasar">
@@ -31,17 +31,10 @@
                      <option name="DESC" value="Descending">Z-A / 9-0</option>
                   </optgroup>
                </select>
-
-
-
-
-               <button type="button" class="btn btn-primary" name="sort-submit">Urutkan</button>
+               <button type="submit" class="btn btn-primary" name="sort-submit">Urutkan</button>
             </div>
-         </div> -->
-         <input type="submit" name="ASC" value="Ascending"><br><br>
-         <input type="submit" name="DESC" value="Descending"><br><br>
-
-         
+         </div>
+ 
          <table class="table table-hover text-center">
             <thead>
                <tr>
@@ -69,6 +62,18 @@
                         <td><i class="fas fa-download bg-success p-2 text-white rounded btn" data-toggle="tooltip" title="Download File"></i></td>
                      </tr>
                <?php }
+               }
+
+               if (isset($_POST["sort-submit"])){
+                  // $name= $_POST["name"];
+                  // $nik= $_POST["nik"];
+               
+               
+                  
+                  $sql = "SELECT * FROM users ORDER BY usersName;";
+                  $result = mysqli_query($conn, $sql);
+                  $resultCheck = mysqli_num_rows($result);
+               
                }
                $i++;
                ?>

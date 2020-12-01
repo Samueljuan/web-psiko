@@ -14,8 +14,6 @@ if (isset($_POST["submit"])){
    }
 
    loginUser($conn, $username, $pwd); 
-   loginAdmin($conn, $username, $pwd);
-
 
 }
 else{

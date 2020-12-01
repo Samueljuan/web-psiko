@@ -7,7 +7,7 @@
 <body>
    <?php
    include_once 'header.php';
-   // include_once '../includes/database.php';
+   include_once '../includes/database.php';
    ?>
 
    <div class="col-md-10 p-5 pt-2">
@@ -16,58 +16,39 @@
       <!-- display-4 agar angkanya lebih besar -->
       <div class="row text-white">
          <?php
-         if (isset($_SESSION["useruid"])) {
-            echo "<p style='color: black'> Hello" . $_SESSION["useruid"] . "</p>";
-            $sql= "SELECT * FROM users;";
-            echo $sql;
-         } 
+         $ses = "useruid";
+         if (isset($_SESSION[$ses])) {
+            echo "<p style='color: black'> Hello" . $_SESSION[$ses] . "</p>";
+         }
          ?>
-         <p>PP</p>
          <table class="table">
-            <tr>
-               <td> Nama: </td>
-               <td> Samuel Juan Pranoto</td>
-            </tr>
-            <tr>
-               <td> NRP: </td>
-               <td> 1972016</td>
-            </tr>
-            <tr>
-               <td> Alamat: </td>
-               <td> Semarang</td>
-            </tr>
-            <tr>
-               <td> No.Tlp: </td>
-               <td> 081234567890</td>
-            </tr>
-            <tr>
-               <td> Jabatan: </td>
-               <td> Anggota</td>
-            </tr>
-            <tr>
-               <td> Nama: </td>
-               <td> Samuel Juan Pranoto</td>
-            </tr>
-            <tr>
-               <td> Nama: </td>
-               <td> Samuel Juan Pranoto</td>
-            </tr>
-            <tr>
-               <td> Nama: </td>
-               <td> Samuel Juan Pranoto</td>
-            </tr>
-            <tr>
-               <td> Nama: </td>
-               <td> Samuel Juan Pranoto</td>
-            </tr>
-            <tr>
-               <td> Nama: </td>
-               <td> Samuel Juan Pranoto</td>
-            </tr>
-            <tr>
-               <td> Nama: </td>
-               <td> Samuel Juan Pranoto</td>
-            </tr>
+            <?php
+            $sql = "SELECT usersId, usersEmail, usersName FROM users WHERE usersId='useruid'";
+            $result = mysqli_query($conn, $sql);
+            $resultCheck = mysqli_num_rows($result);
+
+
+            if ($resultCheck > 0) {
+               while ($row = mysqli_fetch_assoc($result)) { ?>
+                  <tr>
+                     <th>NIK: </th>
+                     <td><?= $row["usersId"]; ?></td>
+                  </tr>
+                  <tr>
+                     <th>Nama: </th>
+                     <td><?= $row["usersName"]; ?></td>
+                  </tr>
+                  <tr>
+                     <th>Email: </th>
+                     <td><?= $row["usersEmail"]; ?></td>
+                  </tr>
+            <?php }
+            } else {
+               echo "0 results";
+            }
+
+            exit();
+            ?>
          </table>
       </div>
    </div>

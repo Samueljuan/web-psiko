@@ -7,10 +7,10 @@ if (isset($_POST['submit'])) {
    require_once 'functions.inc.php';
 
    if (nikExist($conn, $nik) !== false) {
-      header("location: ../phpAdmin/hapus-dosen?error=invalidnik");
+      header("location: ../phpAdmin/delete.php?error=invalidnik");
    } 
-   deleteLecturer($conn, $nik);
+   delete($conn, $nik);
 }
 else {
-   header("location: ../phpAdmin/hapus-dosen.php");
+   header("location: ../phpAdmin/delete.php");
 }

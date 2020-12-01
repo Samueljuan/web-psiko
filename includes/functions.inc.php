@@ -1,8 +1,8 @@
 <?php
 
-function emptyInputSignup($name, $email, $username, $nik, $pwd, $pwdRepeat){
+function emptyInputSignup($name, $email,  $nik, $status, $username, $pwd, $pwdRepeat){
    $result;
-   if (empty($name) || empty ($email)|| empty ($username)|| empty ($nik)|| empty ($pwd)|| empty ($pwdRepeat) ){
+   if (empty($name) || empty ($email)||  empty ($nik)|| empty($status) || empty ($username)|| empty ($pwd)|| empty ($pwdRepeat) ){
       $result = true;
    }
    else{
@@ -68,33 +68,9 @@ function uidExists($conn, $username, $email){
    mysqli_stmt_close($stmt);
 }
 
-function uidExistsAdmin($conn, $username, $email){
-   $sql = "SELECT * FROM admins WHERE adminUid = ? OR adminEmail = ?;";
-   $stmt = mysqli_stmt_init($conn);
-   if (!mysqli_stmt_prepare($stmt, $sql)){
-      header ("location: ../phpAdmin/daftar.php?error=stmtfailed");
-      exit();
-   }
 
-   mysqli_stmt_bind_param($stmt, "ss", $username, $email); 
-   mysqli_stmt_execute($stmt);
-
-   $resultData= mysqli_stmt_get_result($stmt);
-
-   if ($row = mysqli_fetch_assoc($resultData)){
-      return $row;
-   }
-   else{
-      $result=false;
-      return $result;
-   }
-
-   mysqli_stmt_close($stmt);
-}
-
-
-function createUser($conn, $name, $email, $username, $pwd){
-   $sql = "INSERT INTO users(usersName, usersEmail, usersUid, usersPwd) VALUES (?, ?, ?, ?);";
+function createUser($conn, $name, $email, $nik, $status, $username, $pwd){
+   $sql = "INSERT INTO users(usersName, usersEmail, usersId, UsersStatus, usersUid, usersPwd) VALUES (?, ?, ?, ?, ?, ?);";
    $stmt= mysqli_stmt_init($conn);
    if (!mysqli_stmt_prepare($stmt, $sql)){
       header ("location: ../phpAdmin/daftar.php?error=stmtfailed");
@@ -103,27 +79,10 @@ function createUser($conn, $name, $email, $username, $pwd){
 
    $hasedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-   mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hasedPwd);
+   mysqli_stmt_bind_param($stmt, "ssssss", $name, $email, $nik, $status, $username, $hasedPwd);
    mysqli_stmt_execute($stmt);
    mysqli_stmt_close($stmt);
    header ("location: ../phpAdmin/daftar.php?error=none");
-   exit();
-}
-
-function createAdmin($conn, $name, $email, $nik, $username, $pwd){
-   $sql = "INSERT INTO admins(adminName, adminEmail, adminId, adminUid, adminPwd) VALUES (?, ?, ?, ?, ?);";
-   $stmt= mysqli_stmt_init($conn);
-   if (!mysqli_stmt_prepare($stmt, $sql)){
-      header ("location: ../phpAdmin/daftar-admin.php?error=stmtfailed");
-      exit();
-   }
-
-   $hasedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-   mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $nik, $username, $hasedPwd);
-   mysqli_stmt_execute($stmt);
-   mysqli_stmt_close($stmt);
-   header ("location: ../phpAdmin/daftar-admin.php?error=none");
    exit();
 }
 
@@ -155,52 +114,41 @@ function loginUser($conn, $username, $pwd){
    } 
    else if ($checkPwd === true){
       session_start();
+      
       $_SESSION["userid"] = $uidExists["usersId"];
       $_SESSION["useruid"] = $uidExists["usersUid"];
+      
       header ("location: ../phpUsers/dashboard.php");
       exit();
    }
 }
 
-function loginAdmin($conn, $username, $pwd){
-   $uidExistsAdmin = uidExistsAdmin($conn, $username, $username);
-
-   if ($uidExistsAdmin === false){
-      header ("location: ../index.php?error=wronglogin");
-      exit();
-   }
-
-   $pwdHashed= $uidExistsAdmin["adminPwd"];
-   $checkPwd = password_verify($pwd, $pwdHashed);
-
-   if ($checkPwd === false){
-      header ("location: ../index.php?error=wronglogin");
-      exit();
-   } 
-   else if ($checkPwd === true){
-      session_start();
-      $_SESSION["adminid"] = $uidExistsAdmin["adminId"];
-      $_SESSION["adminuid"] = $uidExistsAdmin["adminUid"];
-      header ("location: ../phpAdmin/dashboard.php");
-      exit();
-   }
-}
-
 function nikExist($conn, $nik){
-   $sql = "SELECT * FROM admins WHERE usersId = $nik;";
+   $sql = "SELECT * FROM users WHERE usersId = ?;";
    $stmt = mysqli_stmt_init($conn);
    if (!mysqli_stmt_prepare($stmt, $sql)){
-      header ("location: ../phpAdmin/hapus-dosen.php?error=stmtfailed");
+      header ("location: ../phpAdmin/delete.php?error=stmtfailed");
       exit();
    }
+
+   mysqli_stmt_bind_param($stmt, "i", $nik); 
+   mysqli_stmt_execute($stmt);
+
+   $resultData= mysqli_stmt_get_result($stmt);
+
+   if ($row = mysqli_fetch_assoc($resultData)){
+      return $row;
+   }
+   else{
+      $result=false;
+      return $result;
+   }
+
+   mysqli_stmt_close($stmt);
 }
 
-function deleteLecturer($conn, $nik){
-   $sql= "DELETE FROM 'users' WHERE usersId=$nik;";
-   $stmt= mysqli_stmt_init($conn);
-
-   if (!mysqli_stmt_prepare($stmt, $sql)){
-      header ("location: ../phpAdmin/hapus-dosen.php?error=stmtfailed");
-      exit();
-   }
+function delete($conn, $nik){
+   $sql= "DELETE FROM users WHERE usersId=$nik;";
+   $stmt= mysqli_query($conn, $sql);
+   header("Location: ../phpAdmin/delete.php");
 }

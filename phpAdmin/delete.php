@@ -20,11 +20,12 @@
                 </div>";
          }else if ($_GET["error"] == "stmtfailed") {
             echo "<div class='alert alert-danger' role='alert'>
-                  Ada yang salah! Coba lagi!
+                  Ada yang Salah! Coba Lagi!
                 </div>";
          }
       }
       ?>
+      
       <form class="pt-3 bg-white" data-aos="zoom-in-up" method="POST" action="../includes/delete.inc.php">
          <div class="row form-group">
             <div class="col-md-12">

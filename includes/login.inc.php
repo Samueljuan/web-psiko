@@ -15,6 +15,10 @@ if (isset($_POST["submit"])){
 
    loginUser($conn, $username, $pwd); 
 
+   // if ($_SESSION["userStatus"] == "admin"){
+      // header ("location: ../index.php?error=emptyinput"); Halaman admin
+   // }
+
 }
 else{
    header ("location: ../index.php");

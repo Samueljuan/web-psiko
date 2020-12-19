@@ -115,19 +115,19 @@ function loginUser($conn, $username, $pwd){
    else if ($checkPwd === true){
       session_start();
       
-      $_SESSION["userid"] = $uidExists["usersId"];
-      $_SESSION["useruid"] = $uidExists["usersUid"];
+      $_SESSION["adminUid"] = $uidExists["adminUid"];
       
-      header ("location: ../phpUsers/dashboard.php");
+      header ("location: ../phpAdmin/dashboard.php");
       exit();
    }
 }
 
-function nikExist($conn, $nik){
-   $sql = "SELECT * FROM users WHERE usersId = ?;";
+function nikExists($conn, $nik){
+
+   $sql = "SELECT * FROM users WHERE usersId = ? OR usersEmail = ?;";
    $stmt = mysqli_stmt_init($conn);
    if (!mysqli_stmt_prepare($stmt, $sql)){
-      header ("location: ../phpAdmin/delete.php?error=stmtfailed");
+      header ("location: ../phpAdmin/daftar.php?error=stmtfailed");
       exit();
    }
 
@@ -151,4 +151,21 @@ function delete($conn, $nik){
    $sql= "DELETE FROM users WHERE usersId=$nik;";
    $stmt= mysqli_query($conn, $sql);
    header("Location: ../phpAdmin/delete.php");
+}
+
+function changePassword($conn, $name, $email, $nik, $status, $username, $pwd){
+   $sql = "INSERT INTO users(usersName, usersEmail, usersId, UsersStatus, usersUid, usersPwd) VALUES (?, ?, ?, ?, ?, ?);";
+   $stmt= mysqli_stmt_init($conn);
+   if (!mysqli_stmt_prepare($stmt, $sql)){
+      header ("location: ../phpAdmin/daftar.php?error=stmtfailed");
+      exit();
+   }
+
+   $hasedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+   mysqli_stmt_bind_param($stmt, "ssssss", $name, $email, $nik, $status, $username, $hasedPwd);
+   mysqli_stmt_execute($stmt);
+   mysqli_stmt_close($stmt);
+   header ("location: ../phpAdmin/daftar.php?error=none");
+   exit();
 }

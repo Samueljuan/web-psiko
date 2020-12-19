@@ -46,7 +46,7 @@
       }
       ?>
 
-      <form class="pt-3 bg-white" data-aos="zoom-in-up" method="POST" action="../includes/signup.inc.php">
+      <form class="pt-3 bg-white" method="POST" action="../includes/signup.inc.php">
          <div class="row form-group">
             <div class="col-md-12">
                <label class="text-black" for=""><strong>Nama</strong></label>

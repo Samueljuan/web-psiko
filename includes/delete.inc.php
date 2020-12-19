@@ -1,14 +1,18 @@
 <?php
 
 if (isset($_POST['submit'])) {
+
    $nik = $_POST['nik'];
 
    require_once 'database.php';
    require_once 'functions.inc.php';
 
-   if (nikExist($conn, $nik) !== false) {
-      header("location: ../phpAdmin/delete.php?error=invalidnik");
-   } 
+
+   if (nikExists($conn, $nik) !== false) {
+      header("location: ../phpAdmin/daftar.php?error=invalidnik");
+      exit();
+   }
+
    delete($conn, $nik);
 }
 else {
